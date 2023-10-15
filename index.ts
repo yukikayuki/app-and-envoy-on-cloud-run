@@ -3,7 +3,7 @@ const app = express()
 const DEFAULT_PORT = 3000
 
 app.get('/', (req, res) => {
-  return res.json({hello: 'world'})
+  return res.json({hello: 'next world'})
 })
 
 app.get('/hello', (req, res) => {
