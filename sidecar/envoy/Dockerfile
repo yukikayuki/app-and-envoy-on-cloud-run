@@ -1,5 +1,13 @@
+# https://blog.markvincze.com/how-to-use-envoy-as-a-load-balancer-in-kubernetes/
 FROM envoyproxy/envoy:v1.27.1
-COPY envoy.tmpl.yaml /etc/envoy/envoy.yaml
+COPY envoy.tmpl.yaml /tmpl/envoy.tmpl.yaml
+COPY docker-entrypoint.sh /
+
+RUN chmod 500 /docker-entrypoint.sh
+
+RUN apt-get update && \
+    apt-get install gettext -y
+
 EXPOSE 9001
-# docker build -t envoy:latest .
-# docker run --rm --name eproxy -p 9001:9001 envoy:latest
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
