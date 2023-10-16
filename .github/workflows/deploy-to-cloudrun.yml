@@ -33,11 +33,18 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker asia-northeast1-docker.pkg.dev
 
-      - name: Build
-        run: docker build --platform linux/amd64 -t asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME:$TAG .
+      - name: Build express-app
+        run: docker build --platform linux/amd64 -t asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/express-app:$TAG .
 
-      - name: Push
-        run: docker push asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME:$TAG
+      - name: Push express-app
+        run: docker push asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/express-app:$TAG
+
+      - name: Build envoy
+        working-directory: sidecar/envoy
+        run: docker build --platform linux/amd64 -t asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/envoy:$TAG .
+
+      - name: Push envoy
+        run: docker push asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/envoy:$TAG
 
       - name: Deploy
-        run: gcloud run deploy $SERVICE_NAME --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME:$TAG --platform managed --region $REGION --allow-unauthenticated
+        run: gcloud run deploy $SERVICE_NAME --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/express-app:$TAG --platform managed --region $REGION --allow-unauthenticated
