@@ -1,0 +1,22 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/launch-stage: BETA
+  name: ${SERVICE_NAME}
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/execution-environment: gen1
+    spec:
+      containers:
+        - name: envoy
+          image: asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/envoy:latest
+          ports:
+            - containerPort: 9001
+          env:
+            - name: PROXY_TARGET_ADDRESS
+              value: 127.0.0.1
+        - name: express-app
+          image: asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/express-app:latest

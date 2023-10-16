@@ -2,6 +2,9 @@
   "name": "express-and-cloud-run",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "deploy": "source .env && cat cloud-run-service.tmpl.yaml | envsubst \\$PROJECT_ID,\\$REPOSITORY_NAME,\\$SERVICE_NAME > tmp.yaml && gcloud run services replace tmp.yaml --region=asia-northeast1"
+  },
   "devDependencies": {
     "@types/express": "^4.17.19",
     "bun-types": "latest"
