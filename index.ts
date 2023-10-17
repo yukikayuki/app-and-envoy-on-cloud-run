@@ -6,10 +6,6 @@ app.get('/', (req, res) => {
   return res.json({hello: 'next world'})
 })
 
-app.get('/hello', (req, res) => {
-  return res.json({world: 'world'})
-})
-
 app.get('/prefectures', (req, res) => {
   // https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html
   return res.json({
