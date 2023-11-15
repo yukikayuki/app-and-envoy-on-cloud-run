@@ -7,12 +7,18 @@ metadata:
 spec:
   template:
     metadata:
+      labels:
+        revision: "1"
       annotations:
-        run.googleapis.com/execution-environment: gen1
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/container-dependencies: '{"app":["envoy"]}'
     spec:
       containers:
         - name: envoy
           image: asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/envoy:latest
+          resources:
+            limits:
+              memory: 256Mi
           ports:
             - containerPort: 9001
           env:
@@ -20,3 +26,6 @@ spec:
               value: 127.0.0.1
         - name: app
           image: asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/app:latest
+          resources:
+            limits:
+              memory: 256Mi
