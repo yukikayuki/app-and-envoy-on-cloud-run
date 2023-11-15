@@ -1,14 +1,14 @@
-import express from 'express'
-const app = express()
-const DEFAULT_PORT = 3000
+import { Hono } from 'hono'
 
-app.get('/', (req, res) => {
-  return res.json({hello: 'next world'})
+const app = new Hono()
+
+app.get('/', (c) => {
+  return c.json({hello: 'next world'})
 })
 
-app.get('/prefectures', (req, res) => {
+app.get('/prefectures', (c) => {
   // https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html
-  return res.json({
+  return c.json({
     "message": null,
     "result": [{
       "prefCode": 1,
@@ -155,6 +155,4 @@ app.get('/prefectures', (req, res) => {
   })
 })
 
-app.listen(process.env.PORT ?? DEFAULT_PORT, () => {
-  console.log(`App listening on port ${process.env.PORT ?? DEFAULT_PORT}`)
-})
+export default app

@@ -18,5 +18,5 @@ spec:
           env:
             - name: PROXY_TARGET_ADDRESS
               value: 127.0.0.1
-        - name: express-app
-          image: asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/express-app:latest
+        - name: app
+          image: asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/app:latest

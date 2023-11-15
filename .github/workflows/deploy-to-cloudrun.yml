@@ -8,7 +8,6 @@ env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   REGION: ${{ vars.GCP_REGION }}
   REPOSITORY_NAME: ${{ secrets.GCP_ARTIFACT_REGISTRY_REPOSITORY_NAME }}
-  IMAGE_NAME: ${{ vars.IMAGE_NAME }}
   SERVICE_NAME: ${{ vars.GCP_CLOUD_RUN_SERVICE_NAME }}
   TAG: latest
 
@@ -33,11 +32,11 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker asia-northeast1-docker.pkg.dev
 
-      - name: Build express-app
-        run: docker build --platform linux/amd64 -t asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/express-app:$TAG .
+      - name: Build app
+        run: docker build --platform linux/amd64 -t asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/app:$TAG .
 
-      - name: Push express-app
-        run: docker push asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/express-app:$TAG
+      - name: Push app
+        run: docker push asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/app:$TAG
 
       - name: Build envoy
         working-directory: sidecar/envoy
@@ -47,4 +46,4 @@ jobs:
         run: docker push asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/envoy:$TAG
 
       - name: Deploy
-        run: gcloud run deploy $SERVICE_NAME --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/express-app:$TAG --platform managed --region $REGION --allow-unauthenticated
+        run: gcloud run deploy $SERVICE_NAME --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/app:$TAG --platform managed --region $REGION --allow-unauthenticated
