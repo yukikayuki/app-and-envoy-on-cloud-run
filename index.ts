@@ -8,9 +8,7 @@ app.get('/', (c) => {
 
 app.get('/prefectures', (c) => {
   // https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html
-  return c.json({
-    "message": null,
-    "result": [{
+  return c.json([{
       "prefCode": 1,
       "prefName": "北海道"
     }, {
@@ -152,7 +150,7 @@ app.get('/prefectures', (c) => {
       "prefCode": 47,
       "prefName": "沖縄県"
     }]
-  })
+  )
 })
 
 export default app
