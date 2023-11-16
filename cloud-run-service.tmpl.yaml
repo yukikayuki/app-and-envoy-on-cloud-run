@@ -11,7 +11,7 @@ spec:
         revision: "1"
       annotations:
         run.googleapis.com/execution-environment: gen2
-        run.googleapis.com/container-dependencies: '{"app":["envoy"]}'
+        run.googleapis.com/container-dependencies: '{"envoy":["app"]}'
     spec:
       containers:
         - name: envoy
