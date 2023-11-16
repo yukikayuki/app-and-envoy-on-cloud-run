@@ -1,3 +1,4 @@
+# https://cloud.google.com/run/docs/reference/yaml/v1
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
@@ -11,6 +12,7 @@ spec:
         revision: "1"
       annotations:
         run.googleapis.com/execution-environment: gen2
+        # https://cloud.google.com/run/docs/configuring/services/containers?hl=ja#container-ordering
         run.googleapis.com/container-dependencies: '{"envoy":["app"]}'
     spec:
       containers:
