@@ -1,4 +1,5 @@
 #!/bin/sh
+# https://blog.markvincze.com/how-to-use-envoy-as-a-load-balancer-in-kubernetes/
 set -e
 
 echo "Generating envoy.yaml config file..."
