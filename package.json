@@ -4,15 +4,23 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --hot index.ts",
-    "deploy": "source .env && cat cloud-run-service.tmpl.yaml | envsubst \\$PROJECT_ID,\\$REPOSITORY_NAME,\\$SERVICE_NAME > tmp.yaml && gcloud run services replace tmp.yaml --region=asia-northeast1"
+    "deploy": "source .env && cat cloud-run-service.tmpl.yaml | envsubst \\$PROJECT_ID,\\$REPOSITORY_NAME,\\$SERVICE_NAME > tmp.yaml && gcloud run services replace tmp.yaml --region=asia-northeast1",
+    "fmt": "prettier --write ./*.{ts,tsx}"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "prettier": "^3.1.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
     "hono": "^3.10.0"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true,
+    "semi": false,
+    "printWidth": 100
   }
 }
