@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun run --hot index.ts",
+    "dev": "bun run --hot index.tsx",
     "deploy": "source .env && cat cloud-run-service.tmpl.yaml | envsubst \\$PROJECT_ID,\\$REPOSITORY_NAME,\\$SERVICE_NAME > tmp.yaml && gcloud run services replace tmp.yaml --region=asia-northeast1",
     "fmt": "prettier --write ./*.{ts,tsx}"
   },

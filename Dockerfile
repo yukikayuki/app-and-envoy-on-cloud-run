@@ -5,4 +5,4 @@ COPY bun.lockb ./
 RUN bun install
 COPY . .
 EXPOSE 3000
-CMD ["bun", "index.ts"]
+CMD ["bun", "index.tsx"]
